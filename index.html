@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPG to PNG Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-image"></i> JPG to PNG Converter</h1>
+            <p>Resimlerinizi hızlı ve kolay bir şekilde JPG'den PNG formatına dönüştürün</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <h3>Resim Yükleyin</h3>
+                        <p>JPG dosyalarınızı buraya sürükleyip bırakın veya tıklayarak seçin</p>
+                        <button class="upload-btn" id="uploadBtn">
+                            <i class="fas fa-plus"></i> Dosya Seç
+                        </button>
+                    </div>
+                    <input type="file" id="fileInput" accept=".jpg,.jpeg" multiple hidden>
+                </div>
+            </div>
+
+            <div class="files-section" id="filesSection" style="display: none;">
+                <h3><i class="fas fa-list"></i> Yüklenen Dosyalar</h3>
+                <div class="files-list" id="filesList"></div>
+                <div class="actions">
+                    <button class="btn btn-primary" id="convertAllBtn">
+                        <i class="fas fa-magic"></i> Tümünü Dönüştür
+                    </button>
+                    <button class="btn btn-secondary" id="clearAllBtn">
+                        <i class="fas fa-trash"></i> Temizle
+                    </button>
+                </div>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h3><i class="fas fa-download"></i> Dönüştürülen Dosyalar</h3>
+                <div class="results-list" id="resultsList"></div>
+                <button class="btn btn-success" id="downloadAllBtn">
+                    <i class="fas fa-download"></i> Tümünü İndir
+                </button>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 JPG to PNG Converter. Modern ve kullanıcı dostu arayüz.</p>
+        </footer>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Resimler dönüştürülüyor...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
