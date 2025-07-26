@@ -1,103 +1,100 @@
-# JPG to PNG Converter
+# Arkaplan Kaldırıcı - Modern Resim İşleme Aracı
 
-Modern ve kullanıcı dostu bir web uygulaması ile JPG resimlerinizi PNG formatına dönüştürün.
+Modern ve kullanıcı dostu bir web uygulaması ile resimlerinizin arkaplanını kolayca kaldırın.
 
-## 🚀 Özellikler
+## 🌟 Özellikler
 
-- **Modern Arayüz**: Güzel gradientler ve animasyonlarla modern tasarım
-- **Sürükle & Bırak**: Dosyaları kolayca sürükleyip bırakabilirsiniz
-- **Toplu Dönüştürme**: Birden fazla JPG dosyasını aynı anda dönüştürebilirsiniz
-- **Gerçek Zamanlı İlerleme**: Dönüştürme işlemini takip edebilirsiniz
-- **Responsive Tasarım**: Mobil ve masaüstü cihazlarda mükemmel görünüm
-- **Anında İndirme**: Dönüştürülen dosyaları hemen indirebilirsiniz
-- **Dosya Boyutu Gösterimi**: Her dosyanın boyutunu görebilirsiniz
+- **Modern Arayüz**: Güzel ve kullanıcı dostu tasarım
+- **Sürükle & Bırak**: Resimleri kolayca yükleyin
+- **Çoklu Format Desteği**: JPG, PNG, WEBP formatlarını destekler
+- **Gerçek Zamanlı Önizleme**: Yüklenen resimlerin önizlemesini görün
+- **Toplu İşleme**: Birden fazla resmi aynı anda işleyin
+- **İlerleme Göstergesi**: İşlem durumunu takip edin
+- **Responsive Tasarım**: Tüm cihazlarda mükemmel görünüm
 
-## 🎨 Tasarım Özellikleri
+## 🚀 Kullanım
 
-- **Gradient Arka Plan**: Mor-mavi gradient arka plan
-- **Cam Efekti**: Modern glassmorphism tasarım
-- **Animasyonlar**: Yumuşak geçişler ve hover efektleri
-- **İkonlar**: Font Awesome ikonları ile görsel zenginlik
-- **Tipografi**: Inter font ailesi ile modern yazı tipi
+1. **Resim Yükleme**: Resimlerinizi sürükleyip bırakın veya "Dosya Seç" butonuna tıklayın
+2. **Arkaplan Kaldırma**: "Arkaplanı Kaldır" butonuna tıklayın
+3. **İndirme**: İşlenen resimleri tek tek veya toplu olarak indirin
 
-## 📱 Kullanım
+## 🛠️ Teknolojiler
 
-1. **Dosya Yükleme**:
-   - "Dosya Seç" butonuna tıklayın
-   - Veya dosyaları sürükleyip bırakın
-   - Sadece JPG/JPEG dosyaları kabul edilir
+- **HTML5**: Modern web standartları
+- **CSS3**: Gradient'lar, animasyonlar ve responsive tasarım
+- **JavaScript (ES6+)**: Modern JavaScript özellikleri
+- **Canvas API**: Resim işleme
+- **File API**: Dosya yükleme ve işleme
 
-2. **Dönüştürme**:
-   - Yüklenen dosyaları görüntüleyin
-   - "PNG'ye Dönüştür" butonuna tıklayın
-   - İlerleme çubuğunu takip edin
+## 📁 Dosya Yapısı
 
-3. **İndirme**:
-   - Dönüştürülen dosyaları tek tek indirin
-   - Veya "Tümünü İndir" ile toplu indirme yapın
-
-## 🛠️ Teknik Detaylar
-
-### Kullanılan Teknolojiler
-- **HTML5**: Modern semantik yapı
-- **CSS3**: Flexbox, Grid, Animasyonlar, Gradients
-- **JavaScript ES6+**: Class yapısı, Async/Await, Canvas API
-- **Canvas API**: Resim dönüştürme işlemi
-
-### Dosya Yapısı
 ```
 ├── index.html          # Ana HTML dosyası
 ├── styles.css          # CSS stilleri
 ├── script.js           # JavaScript fonksiyonları
-└── README.md           # Bu dosya
+└── README.md           # Proje dokümantasyonu
 ```
 
-### Tarayıcı Desteği
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
+## 🎨 Özellikler Detayı
 
-## 🚀 Kurulum
+### Arkaplan Kaldırma Algoritması
+Uygulama, basit bir arkaplan kaldırma algoritması kullanır:
+- Kenar algılama
+- Renk tabanlı arkaplan tespiti
+- Merkez mesafesi hesaplama
 
-1. Dosyaları bilgisayarınıza indirin
+### Desteklenen Formatlar
+- JPEG (.jpg, .jpeg)
+- PNG (.png)
+- WebP (.webp)
+
+### Çıktı Formatı
+Tüm işlenen resimler PNG formatında, şeffaf arkaplan ile kaydedilir.
+
+## 🔧 Kurulum
+
+1. Projeyi klonlayın veya indirin
 2. `index.html` dosyasını bir web tarayıcısında açın
-3. Uygulamayı kullanmaya başlayın!
+3. Kullanmaya başlayın!
 
-## 📋 Özellikler Detayı
+## 🌐 Tarayıcı Desteği
 
-### Dosya İşleme
-- JPG/JPEG formatı desteği
-- Dosya boyutu sınırı yok (tarayıcı limitleri dahilinde)
-- Toplu dosya yükleme
-- Dosya önizleme ve boyut gösterimi
+- Chrome (önerilen)
+- Firefox
+- Safari
+- Edge
 
-### Dönüştürme İşlemi
-- Canvas API ile yüksek kaliteli dönüştürme
-- Orijinal boyutları koruma
-- PNG formatında %90 kalite
-- Asenkron işlem ile performans
+## 📱 Responsive Tasarım
 
-### Kullanıcı Deneyimi
-- Sürükle-bırak desteği
-- Gerçek zamanlı bildirimler
-- İlerleme göstergesi
-- Hata yönetimi
-- Responsive tasarım
+Uygulama tüm cihazlarda mükemmel çalışır:
+- Masaüstü bilgisayarlar
+- Tabletler
+- Mobil telefonlar
 
-## 🎯 Gelecek Özellikler
+## 🔮 Gelecek Özellikler
 
-- [ ] PNG'den JPG'ye dönüştürme
-- [ ] Resim boyutlandırma
-- [ ] Kalite ayarları
-- [ ] Toplu indirme (ZIP)
-- [ ] Karanlık tema
-- [ ] Daha fazla format desteği
+- AI tabanlı arkaplan kaldırma
+- Bulut tabanlı işleme
+- Daha fazla format desteği
+- Gelişmiş filtreler
+- Sosyal medya entegrasyonu
 
-## 📞 Destek
+## 📄 Lisans
 
-Herhangi bir sorun yaşarsanız veya önerileriniz varsa, lütfen iletişime geçin.
+Bu proje MIT lisansı altında lisanslanmıştır.
+
+## 🤝 Katkıda Bulunma
+
+1. Projeyi fork edin
+2. Yeni bir branch oluşturun (`git checkout -b feature/yeni-ozellik`)
+3. Değişikliklerinizi commit edin (`git commit -am 'Yeni özellik eklendi'`)
+4. Branch'inizi push edin (`git push origin feature/yeni-ozellik`)
+5. Pull Request oluşturun
+
+## 📞 İletişim
+
+Sorularınız veya önerileriniz için lütfen iletişime geçin.
 
 ---
 
-**Not**: Bu uygulama tamamen tarayıcı tabanlıdır. Dosyalarınız sunucuya yüklenmez, tüm işlemler yerel olarak gerçekleştirilir.
+**Not**: Bu uygulama demo amaçlıdır. Gerçek AI tabanlı arkaplan kaldırma için profesyonel API'lar (Remove.bg, Cloudinary, vb.) kullanmanız önerilir.

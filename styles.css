@@ -103,8 +103,21 @@ body {
 
 .upload-content p {
     color: #666;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-size: 1.1rem;
+}
+
+.supported-formats {
+    margin-bottom: 30px;
+}
+
+.supported-formats span {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .upload-btn {
@@ -185,13 +198,21 @@ body {
     font-size: 0.9rem;
 }
 
+.image-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #e9ecef;
+}
+
 .actions {
     display: flex;
     gap: 15px;
     justify-content: center;
 }
 
-.convert-btn, .clear-btn, .download-all-btn {
+.remove-bg-btn, .clear-btn, .download-all-btn {
     padding: 12px 25px;
     border-radius: 50px;
     border: none;
@@ -204,18 +225,18 @@ body {
     font-size: 1rem;
 }
 
-.convert-btn {
+.remove-bg-btn {
     background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     color: white;
     box-shadow: 0 8px 16px rgba(40, 167, 69, 0.3);
 }
 
-.convert-btn:hover:not(:disabled) {
+.remove-bg-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 12px 24px rgba(40, 167, 69, 0.4);
 }
 
-.convert-btn:disabled {
+.remove-bg-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
@@ -339,7 +360,7 @@ body {
         flex-direction: column;
     }
     
-    .convert-btn, .clear-btn {
+    .remove-bg-btn, .clear-btn {
         width: 100%;
         justify-content: center;
     }
