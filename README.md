@@ -1,103 +1,133 @@
-# JPG to PNG Converter
+# Arkaplan Kaldırıcı - AI Background Remover
 
-Modern ve kullanıcı dostu bir web uygulaması ile JPG resimlerinizi PNG formatına dönüştürün.
+Modern ve kullanıcı dostu bir web uygulaması ile resimlerinizin arkaplanını otomatik olarak kaldırın. Yapay zeka destekli bu araç, TensorFlow.js ve BodyPix modeli kullanarak tarayıcınızda yerel olarak çalışır.
 
-## 🚀 Özellikler
+## ✨ Özellikler
 
-- **Modern Arayüz**: Güzel gradientler ve animasyonlarla modern tasarım
-- **Sürükle & Bırak**: Dosyaları kolayca sürükleyip bırakabilirsiniz
-- **Toplu Dönüştürme**: Birden fazla JPG dosyasını aynı anda dönüştürebilirsiniz
-- **Gerçek Zamanlı İlerleme**: Dönüştürme işlemini takip edebilirsiniz
-- **Responsive Tasarım**: Mobil ve masaüstü cihazlarda mükemmel görünüm
-- **Anında İndirme**: Dönüştürülen dosyaları hemen indirebilirsiniz
-- **Dosya Boyutu Gösterimi**: Her dosyanın boyutunu görebilirsiniz
+- 🎯 **AI Destekli**: TensorFlow.js BodyPix modeli ile hassas arkaplan tespiti
+- 🖼️ **Çoklu Format Desteği**: JPG, PNG, WEBP, GIF formatlarını destekler
+- 🚀 **Hızlı İşlem**: Tarayıcınızda yerel olarak çalışır, sunucuya yükleme gerekmez
+- 📱 **Responsive Tasarım**: Mobil ve masaüstü cihazlarda mükemmel görünüm
+- 🎨 **Modern UI**: Güzel animasyonlar ve kullanıcı dostu arayüz
+- 📦 **Toplu İndirme**: Tüm işlenmiş resimleri ZIP olarak indirin
+- ⌨️ **Klavye Kısayolları**: Ctrl+O (dosya seç), Ctrl+Enter (işle)
+- 🔒 **Gizlilik**: Tüm işlemler yerel olarak yapılır, veriler sunucuya gönderilmez
 
-## 🎨 Tasarım Özellikleri
+## 🚀 Kullanım
 
-- **Gradient Arka Plan**: Mor-mavi gradient arka plan
-- **Cam Efekti**: Modern glassmorphism tasarım
-- **Animasyonlar**: Yumuşak geçişler ve hover efektleri
-- **İkonlar**: Font Awesome ikonları ile görsel zenginlik
-- **Tipografi**: Inter font ailesi ile modern yazı tipi
+1. **Resim Yükleme**: 
+   - "Dosya Seç" butonuna tıklayın veya resimleri sürükleyin
+   - Birden fazla resim seçebilirsiniz
 
-## 📱 Kullanım
-
-1. **Dosya Yükleme**:
-   - "Dosya Seç" butonuna tıklayın
-   - Veya dosyaları sürükleyip bırakın
-   - Sadece JPG/JPEG dosyaları kabul edilir
-
-2. **Dönüştürme**:
-   - Yüklenen dosyaları görüntüleyin
-   - "PNG'ye Dönüştür" butonuna tıklayın
-   - İlerleme çubuğunu takip edin
+2. **İşleme**:
+   - "Arkaplanları Kaldır" butonuna tıklayın
+   - AI modeli otomatik olarak arkaplanları tespit edip kaldırır
 
 3. **İndirme**:
-   - Dönüştürülen dosyaları tek tek indirin
-   - Veya "Tümünü İndir" ile toplu indirme yapın
+   - Her resmi ayrı ayrı indirin
+   - Veya "Tümünü İndir (ZIP)" ile toplu indirin
 
-## 🛠️ Teknik Detaylar
+## 🛠️ Teknolojiler
 
-### Kullanılan Teknolojiler
-- **HTML5**: Modern semantik yapı
-- **CSS3**: Flexbox, Grid, Animasyonlar, Gradients
-- **JavaScript ES6+**: Class yapısı, Async/Await, Canvas API
-- **Canvas API**: Resim dönüştürme işlemi
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **AI/ML**: TensorFlow.js, BodyPix Model
+- **Utilities**: JSZip (toplu indirme için)
+- **Design**: Modern CSS Grid/Flexbox, Font Awesome icons
 
-### Dosya Yapısı
+## 📁 Proje Yapısı
+
 ```
+arkaplan-kaldirici/
 ├── index.html          # Ana HTML dosyası
-├── styles.css          # CSS stilleri
-├── script.js           # JavaScript fonksiyonları
-└── README.md           # Bu dosya
+├── styles.css          # CSS stil dosyası
+├── script.js           # JavaScript işlevsellik
+├── README.md           # Proje dokümantasyonu
+└── .gitignore         # Git ignore kuralları
 ```
 
-### Tarayıcı Desteği
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
+## 🌟 Özellikler Detayı
 
-## 🚀 Kurulum
-
-1. Dosyaları bilgisayarınıza indirin
-2. `index.html` dosyasını bir web tarayıcısında açın
-3. Uygulamayı kullanmaya başlayın!
-
-## 📋 Özellikler Detayı
-
-### Dosya İşleme
-- JPG/JPEG formatı desteği
-- Dosya boyutu sınırı yok (tarayıcı limitleri dahilinde)
-- Toplu dosya yükleme
-- Dosya önizleme ve boyut gösterimi
-
-### Dönüştürme İşlemi
-- Canvas API ile yüksek kaliteli dönüştürme
-- Orijinal boyutları koruma
-- PNG formatında %90 kalite
-- Asenkron işlem ile performans
+### AI Modeli
+- **BodyPix**: Google'ın açık kaynak insan segmentasyon modeli
+- **MobileNetV1**: Hızlı ve hafif işlem için optimize edilmiş
+- **Tarayıcı Tabanlı**: Sunucu gerektirmez, tamamen istemci tarafında çalışır
 
 ### Kullanıcı Deneyimi
-- Sürükle-bırak desteği
-- Gerçek zamanlı bildirimler
-- İlerleme göstergesi
-- Hata yönetimi
-- Responsive tasarım
+- **Drag & Drop**: Kolay dosya yükleme
+- **Canlı Önizleme**: Yüklenen resimlerin küçük resimlerini görün
+- **İlerleme Göstergesi**: İşlem durumunu takip edin
+- **Bildirimler**: İşlem sonuçları hakkında anında geri bildirim
 
-## 🎯 Gelecek Özellikler
+### Performans
+- **Optimize Edilmiş**: Hızlı yükleme ve işlem süreleri
+- **Bellek Yönetimi**: Object URL'lerin otomatik temizlenmesi
+- **Responsive**: Tüm cihaz boyutlarında sorunsuz çalışma
 
-- [ ] PNG'den JPG'ye dönüştürme
-- [ ] Resim boyutlandırma
-- [ ] Kalite ayarları
-- [ ] Toplu indirme (ZIP)
-- [ ] Karanlık tema
-- [ ] Daha fazla format desteği
+## 🎨 Tasarım
 
-## 📞 Destek
+Modern ve şık bir arayüz tasarımı:
+- Gradient arkaplanlar
+- Smooth animasyonlar ve geçişler
+- Cam efekti (backdrop blur)
+- Parçacık animasyonları
+- Hover efektleri
 
-Herhangi bir sorun yaşarsanız veya önerileriniz varsa, lütfen iletişime geçin.
+## 📱 Responsive Tasarım
+
+- **Desktop**: Full özellik seti ile geniş ekran deneyimi
+- **Tablet**: Optimize edilmiş düzen ve touch etkileşimleri
+- **Mobile**: Kompakt tasarım ve kolay navigasyon
+
+## 🔧 Kurulum
+
+Bu uygulama tamamen statik dosyalardan oluşur ve herhangi bir kurulum gerektirmez:
+
+1. Projeyi klonlayın veya indirin
+2. `index.html` dosyasını bir web tarayıcısında açın
+3. Kullanmaya başlayın!
+
+```bash
+# Proje klonlama
+git clone [repository-url]
+cd arkaplan-kaldirici
+
+# Yerel sunucu ile çalıştırma (opsiyonel)
+python -m http.server 8000
+# veya
+npx serve .
+```
+
+## 🌐 Tarayıcı Desteği
+
+- ✅ Chrome (önerilen)
+- ✅ Firefox
+- ✅ Safari
+- ✅ Edge
+- ⚠️ IE11+ (sınırlı destek)
+
+## 🤝 Katkıda Bulunma
+
+1. Projeyi fork edin
+2. Yeni bir branch oluşturun (`git checkout -b feature/AmazingFeature`)
+3. Değişikliklerinizi commit edin (`git commit -m 'Add some AmazingFeature'`)
+4. Branch'inizi push edin (`git push origin feature/AmazingFeature`)
+5. Pull Request açın
+
+## 📄 Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosyasına bakın.
+
+## 🙏 Teşekkürler
+
+- [TensorFlow.js](https://www.tensorflow.org/js) - AI model desteği
+- [BodyPix](https://github.com/tensorflow/tfjs-models/tree/master/body-pix) - İnsan segmentasyon modeli
+- [Font Awesome](https://fontawesome.com/) - İkonlar
+- [JSZip](https://stuk.github.io/jszip/) - ZIP dosya oluşturma
+
+## 📞 İletişim
+
+Sorularınız veya önerileriniz için GitHub issues kullanabilirsiniz.
 
 ---
 
-**Not**: Bu uygulama tamamen tarayıcı tabanlıdır. Dosyalarınız sunucuya yüklenmez, tüm işlemler yerel olarak gerçekleştirilir.
+**Not**: Bu uygulama tamamen istemci tarafında çalışır. Resimleriniz hiçbir zaman sunucuya gönderilmez ve gizliliğiniz korunur.
