@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JPG to PNG Converter</title>
+    <title>Arkaplan Kaldırıcı - Background Remover</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,10 +12,10 @@
     <div class="container">
         <header class="header">
             <div class="logo">
-                <i class="fas fa-image"></i>
-                <h1>JPG to PNG Converter</h1>
+                <i class="fas fa-magic"></i>
+                <h1>Arkaplan Kaldırıcı</h1>
             </div>
-            <p class="subtitle">Yüklenen JPG resimlerini PNG formatına dönüştürün</p>
+            <p class="subtitle">Resimlerinizin arkaplanını otomatik olarak kaldırın - Yapay zeka destekli</p>
         </header>
 
         <main class="main-content">
@@ -23,22 +23,25 @@
                 <div class="upload-content">
                     <i class="fas fa-cloud-upload-alt upload-icon"></i>
                     <h3>Resim Yükleyin</h3>
-                    <p>JPG dosyalarını buraya sürükleyin veya seçmek için tıklayın</p>
-                    <input type="file" id="fileInput" accept=".jpg,.jpeg" multiple hidden>
+                    <p>JPG, PNG veya WEBP dosyalarını buraya sürükleyin veya seçmek için tıklayın</p>
+                    <input type="file" id="fileInput" accept="image/*" multiple hidden>
                     <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
                         <i class="fas fa-folder-open"></i>
                         Dosya Seç
                     </button>
+                    <div class="format-info">
+                        <small>Desteklenen formatlar: JPG, PNG, WEBP, GIF</small>
+                    </div>
                 </div>
             </div>
 
             <div class="files-container" id="filesContainer" style="display: none;">
-                <h3>Yüklenen Dosyalar</h3>
+                <h3><i class="fas fa-images"></i> Yüklenen Resimler</h3>
                 <div class="files-list" id="filesList"></div>
                 <div class="actions">
-                    <button class="convert-btn" id="convertBtn" disabled>
+                    <button class="process-btn" id="processBtn" disabled>
                         <i class="fas fa-magic"></i>
-                        PNG'ye Dönüştür
+                        Arkaplanları Kaldır
                     </button>
                     <button class="clear-btn" id="clearBtn">
                         <i class="fas fa-trash"></i>
@@ -48,24 +51,41 @@
             </div>
 
             <div class="progress-container" id="progressContainer" style="display: none;">
+                <div class="progress-header">
+                    <i class="fas fa-cog fa-spin"></i>
+                    <h3>İşleniyor...</h3>
+                </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
-                <p class="progress-text" id="progressText">Dönüştürülüyor...</p>
+                <p class="progress-text" id="progressText">Arkaplan kaldırılıyor...</p>
             </div>
 
             <div class="results-container" id="resultsContainer" style="display: none;">
-                <h3>Dönüştürülen Dosyalar</h3>
-                <div class="results-list" id="resultsList"></div>
-                <button class="download-all-btn" id="downloadAllBtn">
-                    <i class="fas fa-download"></i>
-                    Tümünü İndir
-                </button>
+                <h3><i class="fas fa-check-circle"></i> İşlenmiş Resimler</h3>
+                <div class="results-grid" id="resultsGrid"></div>
+                <div class="download-actions">
+                    <button class="download-all-btn" id="downloadAllBtn">
+                        <i class="fas fa-download"></i>
+                        Tümünü İndir (ZIP)
+                    </button>
+                    <button class="new-images-btn" id="newImagesBtn">
+                        <i class="fas fa-plus"></i>
+                        Yeni Resimler Ekle
+                    </button>
+                </div>
             </div>
         </main>
 
         <footer class="footer">
-            <p>&copy; 2024 JPG to PNG Converter. Modern ve kullanıcı dostu resim dönüştürücü.</p>
+            <div class="footer-content">
+                <p>&copy; 2024 Arkaplan Kaldırıcı. Modern yapay zeka destekli resim işleme aracı.</p>
+                <div class="features">
+                    <span><i class="fas fa-bolt"></i> Hızlı İşlem</span>
+                    <span><i class="fas fa-shield-alt"></i> Güvenli</span>
+                    <span><i class="fas fa-magic"></i> AI Destekli</span>
+                </div>
+            </div>
         </footer>
     </div>
 
@@ -76,6 +96,18 @@
         </div>
     </div>
 
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h3>AI Modeli Yükleniyor...</h3>
+            <p>Lütfen bekleyin, bu işlem birkaç saniye sürebilir</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
