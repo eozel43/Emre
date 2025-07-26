@@ -1,7 +1,7 @@
-class ImageConverter {
+class BackgroundRemover {
     constructor() {
         this.files = [];
-        this.convertedFiles = [];
+        this.processedFiles = [];
         this.initializeElements();
         this.bindEvents();
     }
@@ -11,7 +11,7 @@ class ImageConverter {
         this.fileInput = document.getElementById('fileInput');
         this.filesContainer = document.getElementById('filesContainer');
         this.filesList = document.getElementById('filesList');
-        this.convertBtn = document.getElementById('convertBtn');
+        this.removeBgBtn = document.getElementById('removeBgBtn');
         this.clearBtn = document.getElementById('clearBtn');
         this.progressContainer = document.getElementById('progressContainer');
         this.progressFill = document.getElementById('progressFill');
@@ -47,8 +47,8 @@ class ImageConverter {
         });
 
         // Button events
-        this.convertBtn.addEventListener('click', () => {
-            this.convertImages();
+        this.removeBgBtn.addEventListener('click', () => {
+            this.removeBackgrounds();
         });
 
         this.clearBtn.addEventListener('click', () => {
@@ -62,9 +62,12 @@ class ImageConverter {
 
     handleFiles(fileList) {
         const validFiles = Array.from(fileList).filter(file => {
-            const isValidType = file.type === 'image/jpeg' || file.type === 'image/jpg';
+            const isValidType = file.type === 'image/jpeg' || 
+                              file.type === 'image/jpg' || 
+                              file.type === 'image/png' || 
+                              file.type === 'image/webp';
             if (!isValidType) {
-                this.showNotification(`${file.name} geçerli bir JPG dosyası değil.`, 'error');
+                this.showNotification(`${file.name} geçerli bir resim dosyası değil.`, 'error');
             }
             return isValidType;
         });
@@ -73,8 +76,8 @@ class ImageConverter {
 
         this.files = [...this.files, ...validFiles];
         this.updateFilesList();
-        this.updateConvertButton();
-        this.showNotification(`${validFiles.length} dosya başarıyla yüklendi.`);
+        this.updateRemoveButton();
+        this.showNotification(`${validFiles.length} resim başarıyla yüklendi.`);
     }
 
     updateFilesList() {
@@ -83,13 +86,19 @@ class ImageConverter {
         this.files.forEach((file, index) => {
             const fileItem = document.createElement('div');
             fileItem.className = 'file-item';
+            
+            // Create image preview
+            const img = document.createElement('img');
+            img.className = 'image-preview';
+            img.src = URL.createObjectURL(file);
+            
             fileItem.innerHTML = `
-                <i class="fas fa-image file-icon"></i>
+                <img src="${URL.createObjectURL(file)}" class="image-preview" alt="Preview">
                 <div class="file-info">
                     <div class="file-name">${file.name}</div>
                     <div class="file-size">${this.formatFileSize(file.size)}</div>
                 </div>
-                <button class="clear-btn" onclick="converter.removeFile(${index})" style="padding: 8px 15px; font-size: 0.9rem;">
+                <button class="clear-btn" onclick="remover.removeFile(${index})" style="padding: 8px 15px; font-size: 0.9rem;">
                     <i class="fas fa-times"></i>
                 </button>
             `;
@@ -102,40 +111,40 @@ class ImageConverter {
     removeFile(index) {
         this.files.splice(index, 1);
         this.updateFilesList();
-        this.updateConvertButton();
+        this.updateRemoveButton();
     }
 
-    updateConvertButton() {
-        this.convertBtn.disabled = this.files.length === 0;
+    updateRemoveButton() {
+        this.removeBgBtn.disabled = this.files.length === 0;
     }
 
-    async convertImages() {
+    async removeBackgrounds() {
         if (this.files.length === 0) return;
 
         this.showProgress();
-        this.convertedFiles = [];
+        this.processedFiles = [];
 
         for (let i = 0; i < this.files.length; i++) {
             const file = this.files[i];
             const progress = ((i + 1) / this.files.length) * 100;
             
-            this.updateProgress(progress, `${file.name} dönüştürülüyor...`);
+            this.updateProgress(progress, `${file.name} işleniyor...`);
             
             try {
-                const convertedFile = await this.convertToPNG(file);
-                this.convertedFiles.push(convertedFile);
+                const processedFile = await this.removeBackground(file);
+                this.processedFiles.push(processedFile);
             } catch (error) {
-                console.error('Dönüştürme hatası:', error);
-                this.showNotification(`${file.name} dönüştürülürken hata oluştu.`, 'error');
+                console.error('Arkaplan kaldırma hatası:', error);
+                this.showNotification(`${file.name} işlenirken hata oluştu.`, 'error');
             }
         }
 
         this.hideProgress();
         this.showResults();
-        this.showNotification(`${this.convertedFiles.length} dosya başarıyla PNG'ye dönüştürüldü.`);
+        this.showNotification(`${this.processedFiles.length} resmin arkaplanı başarıyla kaldırıldı.`);
     }
 
-    convertToPNG(file) {
+    async removeBackground(file) {
         return new Promise((resolve, reject) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -144,15 +153,28 @@ class ImageConverter {
             img.onload = () => {
                 canvas.width = img.width;
                 canvas.height = img.height;
+                
+                // Draw the original image
                 ctx.drawImage(img, 0, 0);
+                
+                // Get image data for processing
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                // Simple background removal algorithm
+                // This is a basic implementation - in a real app, you'd use AI/ML services
+                this.simpleBackgroundRemoval(data, canvas.width, canvas.height);
+                
+                // Put the processed image data back
+                ctx.putImageData(imageData, 0, 0);
 
                 canvas.toBlob((blob) => {
-                    const fileName = file.name.replace(/\.(jpg|jpeg)$/i, '.png');
-                    const convertedFile = new File([blob], fileName, {
+                    const fileName = file.name.replace(/\.(jpg|jpeg|png|webp)$/i, '_nobg.png');
+                    const processedFile = new File([blob], fileName, {
                         type: 'image/png',
                         lastModified: Date.now()
                     });
-                    resolve(convertedFile);
+                    resolve(processedFile);
                 }, 'image/png', 0.9);
             };
 
@@ -162,6 +184,90 @@ class ImageConverter {
 
             img.src = URL.createObjectURL(file);
         });
+    }
+
+    simpleBackgroundRemoval(data, width, height) {
+        // This is a simplified background removal algorithm
+        // In a real application, you would integrate with AI services like:
+        // - Remove.bg API
+        // - Cloudinary AI Background Removal
+        // - Google Cloud Vision API
+        // - Azure Computer Vision
+        
+        // For demo purposes, we'll create a simple edge detection and color-based removal
+        const threshold = 30;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                const index = (y * width + x) * 4;
+                const r = data[index];
+                const g = data[index + 1];
+                const b = data[index + 2];
+                
+                // Calculate distance from center
+                const distanceFromCenter = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+                const maxDistance = Math.sqrt(centerX ** 2 + centerY ** 2);
+                const normalizedDistance = distanceFromCenter / maxDistance;
+                
+                // Simple edge detection
+                const isEdge = this.isEdgePixel(data, x, y, width, height, threshold);
+                
+                // Remove background based on distance and edge detection
+                if (normalizedDistance > 0.8 && !isEdge) {
+                    data[index + 3] = 0; // Make transparent
+                } else if (this.isBackgroundColor(r, g, b)) {
+                    // Reduce opacity for background-like colors
+                    data[index + 3] = Math.max(0, data[index + 3] - 100);
+                }
+            }
+        }
+    }
+
+    isEdgePixel(data, x, y, width, height, threshold) {
+        if (x === 0 || y === 0 || x === width - 1 || y === height - 1) {
+            return true;
+        }
+        
+        const currentIndex = (y * width + x) * 4;
+        const currentR = data[currentIndex];
+        const currentG = data[currentIndex + 1];
+        const currentB = data[currentIndex + 2];
+        
+        // Check neighboring pixels
+        const neighbors = [
+            [x-1, y], [x+1, y], [x, y-1], [x, y+1]
+        ];
+        
+        for (const [nx, ny] of neighbors) {
+            if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                const neighborIndex = (ny * width + nx) * 4;
+                const neighborR = data[neighborIndex];
+                const neighborG = data[neighborIndex + 1];
+                const neighborB = data[neighborIndex + 2];
+                
+                const diff = Math.abs(currentR - neighborR) + 
+                           Math.abs(currentG - neighborG) + 
+                           Math.abs(currentB - neighborB);
+                
+                if (diff > threshold) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    isBackgroundColor(r, g, b) {
+        // Simple background color detection
+        // Check for white, light gray, or very light colors
+        const brightness = (r + g + b) / 3;
+        const isLight = brightness > 200;
+        const isGrayish = Math.abs(r - g) < 20 && Math.abs(g - b) < 20 && Math.abs(r - b) < 20;
+        
+        return isLight && isGrayish;
     }
 
     showProgress() {
@@ -181,16 +287,16 @@ class ImageConverter {
     showResults() {
         this.resultsList.innerHTML = '';
         
-        this.convertedFiles.forEach((file, index) => {
+        this.processedFiles.forEach((file, index) => {
             const resultItem = document.createElement('div');
             resultItem.className = 'result-item';
             resultItem.innerHTML = `
-                <i class="fas fa-file-image result-icon"></i>
+                <img src="${URL.createObjectURL(file)}" class="image-preview" alt="Processed">
                 <div class="result-info">
                     <div class="result-name">${file.name}</div>
                     <div class="result-size">${this.formatFileSize(file.size)}</div>
                 </div>
-                <button class="download-all-btn" onclick="converter.downloadFile(${index})" style="padding: 8px 15px; font-size: 0.9rem; margin: 0;">
+                <button class="download-all-btn" onclick="remover.downloadFile(${index})" style="padding: 8px 15px; font-size: 0.9rem; margin: 0;">
                     <i class="fas fa-download"></i>
                     İndir
                 </button>
@@ -202,7 +308,7 @@ class ImageConverter {
     }
 
     downloadFile(index) {
-        const file = this.convertedFiles[index];
+        const file = this.processedFiles[index];
         const url = URL.createObjectURL(file);
         const a = document.createElement('a');
         a.href = url;
@@ -216,9 +322,9 @@ class ImageConverter {
     }
 
     downloadAll() {
-        if (this.convertedFiles.length === 0) return;
+        if (this.processedFiles.length === 0) return;
 
-        this.convertedFiles.forEach((file, index) => {
+        this.processedFiles.forEach((file, index) => {
             setTimeout(() => {
                 this.downloadFile(index);
             }, index * 100);
@@ -229,10 +335,10 @@ class ImageConverter {
 
     clearFiles() {
         this.files = [];
-        this.convertedFiles = [];
+        this.processedFiles = [];
         this.filesContainer.style.display = 'none';
         this.resultsContainer.style.display = 'none';
-        this.updateConvertButton();
+        this.updateRemoveButton();
         this.showNotification('Tüm dosyalar temizlendi.');
     }
 
@@ -265,10 +371,10 @@ class ImageConverter {
     }
 }
 
-// Initialize the converter when the page loads
-let converter;
+// Initialize the background remover when the page loads
+let remover;
 document.addEventListener('DOMContentLoaded', () => {
-    converter = new ImageConverter();
+    remover = new BackgroundRemover();
 });
 
 // Add some nice animations and interactions
